@@ -6,6 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+  	"actions-on-google": "^2.2.0",
+    "firebase-admin": "^5.13.1",
+    "firebase-functions": "^2.0.2",
+    "dialogflow": "^0.6.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.5",
+    "dialogflow-fulfillment": "^0.5.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/n-e-q/DialogFlow-Library-Catalog.git"
