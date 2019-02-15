@@ -1,0 +1,19 @@
+{
+  "name": "dialogflow_library_catalog",
+  "version": "1.0.0",
+  "description": "dialogflow library catalog services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n-e-q/DialogFlow-Library-Catalog.git"
+  },
+  "author": "Annie Khuu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n-e-q/DialogFlow-Library-Catalog/issues"
+  },
+  "homepage": "https://github.com/n-e-q/DialogFlow-Library-Catalog#readme"
+}
