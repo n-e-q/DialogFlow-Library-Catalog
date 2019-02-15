@@ -54,7 +54,8 @@ function hours(agent) {
             return Promise.resolve(agent);
         });
   }*/
-
-function test(){
-	console.log("My module is working!");
+module.exports = {
+		test: function(){
+				console.log("My module is working!");
+			}
 }
