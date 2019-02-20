@@ -54,8 +54,34 @@ function hours(agent) {
             return Promise.resolve(agent);
         });
   }*/
+const rp = require('request-promise-native');
+const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
+const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
+
 module.exports = {
-		test: function(){
+		test: function(agent, requestBody){
 				console.log("My module is working!");
+				return rp.get(catalog_url)
+				.then(jsonBody => {
+					var body = JSON.parse(jsonBody);
+					//var rbody = request.body;
+					// Location service
+					if(body.queryResult.parameters.catalog_service == "where"){
+						console.log("where...");
+					}
+					
+					// Author service
+					if(body.queryResult.parameters.catalog_service == "who"){
+						console.log("who");
+					}
+					
+					// Description service
+					if(body.queryResult.parameters.catalog_service == "describe"){
+						console.log("description")
+					}
+					
+					agent.add("catalog is wip...");
+		      		return Promise.resolve(agent);
+				});
 			}
 }
