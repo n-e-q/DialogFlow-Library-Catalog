@@ -66,7 +66,7 @@ module.exports = {
 						var body = JSON.parse(jsonBody);
 						//var rbody = request.body;
 						// Location service
-						if(body.queryResult.parameters.catalog_service == "where"){
+						/*if(body.queryResult.parameters.catalog_service == "where"){
 							console.log("where...");
 						}
 						
@@ -78,7 +78,7 @@ module.exports = {
 						// Description service
 						if(body.queryResult.parameters.catalog_service == "describe"){
 							console.log("description")
-						}
+						}*/
 						
 						agent.add("catalog is wip...");
 			      		return Promise.resolve(agent);
