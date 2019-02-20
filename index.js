@@ -61,24 +61,25 @@ const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
 module.exports = {
 		test: function(agent, requestBody){
 				console.log(catalog_url);
+				agent.add("hello");
 				return rp.get(catalog_url)
 					.then(jsonBody => {
 						var body = JSON.parse(jsonBody);
 						//var rbody = request.body;
 						// Location service
-						/*if(body.queryResult.parameters.catalog_service == "where"){
+						if(requestBody.queryResult.parameters.catalog_service == "where"){
 							console.log("where...");
 						}
 						
 						// Author service
-						if(body.queryResult.parameters.catalog_service == "who"){
+						if(requestBody.queryResult.parameters.catalog_service == "who"){
 							console.log("who");
 						}
 						
 						// Description service
-						if(body.queryResult.parameters.catalog_service == "describe"){
+						if(requestBody.queryResult.parameters.catalog_service == "describe"){
 							console.log("description")
-						}*/
+						}
 						
 						agent.add("catalog is wip...");
 			      		return Promise.resolve(agent);
