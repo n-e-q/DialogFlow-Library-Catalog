@@ -60,8 +60,8 @@ const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
 
 module.exports = {
 		test: function(agent, requestBody, url){
-				
-				return rp.get(catalog_url)
+		
+				return rp.get(url)
 					.then(jsonBody => {
 						var body = JSON.parse(jsonBody);
 						console.log(body);
