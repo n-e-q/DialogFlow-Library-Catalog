@@ -60,12 +60,12 @@ const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
 
 module.exports = {
 		test: function(agent, requestBody, url){
-				console.log(url);
-				//agent.add("hello");
+				
 				return rp.get(catalog_url)
 					.then(jsonBody => {
 						var body = JSON.parse(jsonBody);
 						console.log(body);
+						var docArray = body.response.docs;
 						//var rbody = request.body;
 						// Location service
 						/*if(requestBody.queryResult.parameters.catalog_service == "where"){
@@ -82,7 +82,12 @@ module.exports = {
 							console.log("description")
 						}*/
 						
-						let output = agent.add("catalog is wip...");
+						var result = "";
+						for(var i = 0; i < docArray.length; i++){
+							result += docArray[i].title_display + ": " + docArray[i].subtitle_display + "\n";
+						}
+						
+						let output = agent.add(result);
 			      		return Promise.resolve(output);
 					});
 			}
