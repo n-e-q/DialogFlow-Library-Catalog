@@ -81,13 +81,17 @@ module.exports = {
 						if(requestBody.queryResult.parameters.catalog_service == "describe"){
 							console.log("description")
 						}*/
+						if(docArray.length > 1)
+							agent.add("There are multiple instances of this item.\n");
 						
 						var result = "";
 						for(var i = 0; i < docArray.length; i++){
-							result += docArray[i].title_display + ": " + docArray[i].subtitle_display + "\n";
+							result = docArray[i].title_display + ": ";
+							if(typeof docArray[i].subtitle_display != 'undefined')
+								result += docArray[i].subtitle_display;
+							result += "\n";
+							agent.add(result);
 						}
-						agent.add("There are multiple instances of this item.\n");
-						agent.add(result);
 			      		return Promise.resolve(agent);
 					});
 			}
