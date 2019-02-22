@@ -82,16 +82,18 @@ module.exports = {
 							console.log("description")
 						}*/
 						if(docArray.length > 1)
-							agent.add("There are " + docArray.length + " instances of this item.\n");
+							agent.add("There are at least " + docArray.length + " instances of this item. Here are the most relevant ones:\n");
 						
 						var result = "";
 						var no = 1;
 						for(var i = 0; i < docArray.length; i++){
-							result = '' + no + ". " + docArray[i].title_display;
+							result = "" + no + ". '" + docArray[i].title_display;
 							
 							if(typeof docArray[i].subtitle_display != 'undefined')
 								result += (": " + docArray[i].subtitle_display);
 							
+							result += "'";
+							result += "[" + docArray[i].format_facet + "]";
 							result += "\n";
 							agent.add(result);
 							no++;
