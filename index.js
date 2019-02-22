@@ -65,6 +65,7 @@ module.exports = {
 				return rp.get(catalog_url)
 					.then(jsonBody => {
 						var body = JSON.parse(jsonBody);
+						console.log(body);
 						//var rbody = request.body;
 						// Location service
 						/*if(requestBody.queryResult.parameters.catalog_service == "where"){
