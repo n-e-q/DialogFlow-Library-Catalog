@@ -86,9 +86,9 @@ module.exports = {
 						for(var i = 0; i < docArray.length; i++){
 							result += docArray[i].title_display + ": " + docArray[i].subtitle_display + "\n";
 						}
-						
-						let output = agent.add(result);
-			      		return Promise.resolve(output);
+						agent.add("There are multiple instances of this item.\n");
+						agent.add(result);
+			      		return Promise.resolve(agent);
 					});
 			}
 }
