@@ -59,8 +59,8 @@ const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
 const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
 
 module.exports = {
-		test: function(agent, requestBody){
-				console.log(catalog_url);
+		test: function(agent, requestBody, url){
+				console.log(url);
 				//agent.add("hello");
 				return rp.get(catalog_url)
 					.then(jsonBody => {
@@ -86,3 +86,12 @@ module.exports = {
 					});
 			}
 }
+
+/*
+	var url = "http://search.lib.virginia.edu/catalog?q=";
+	var bookQuery = $booktitle.replace(/ /g, +);
+	url += bookQuery;
+	url += "&catalog_select=all";
+
+
+*/
