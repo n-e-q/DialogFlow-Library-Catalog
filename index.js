@@ -93,7 +93,9 @@ module.exports = {
 								result += (": " + docArray[i].subtitle_display);
 							
 							result += "'";
-							result += "[" + docArray[i].format_facet + "]";
+							result += " [" + docArray[i].format_facet + "]";
+							if(typeof docArray[i].author_display != 'undefined')
+								result += (" -- " + docArray[i].author_display);
 							result += "\n";
 							agent.add(result);
 							no++;
