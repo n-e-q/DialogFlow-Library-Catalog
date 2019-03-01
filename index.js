@@ -113,7 +113,7 @@ module.exports = {
 					});
 			},
 			
-			promiseRequest() {
+			promiseRequest: function() {
 				  /*return new Promise(resolve => {
 				    request(url, function(err, response, body) {
 				      resolve(body);
