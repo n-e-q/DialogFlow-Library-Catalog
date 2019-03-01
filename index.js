@@ -81,6 +81,7 @@ module.exports = {
 						if(requestBody.queryResult.parameters.catalog_service == "describe"){
 							console.log("description")
 						}*/
+						
 						if(docArray.length > 1)
 							agent.add("There are at least " + docArray.length + " instances of this item. Here are the most relevant ones:\n");
 						
@@ -100,8 +101,23 @@ module.exports = {
 							agent.add(result);
 							no++;
 						}
+						/*var promises = [];
+						
+						for(var i = 0; i < docArray.length; i++){
+							
+						}*/
+						
 			      		return Promise.resolve(agent);
 					});
+			},
+			
+			promiseRequest() {
+				  /*return new Promise(resolve => {
+				    request(url, function(err, response, body) {
+				      resolve(body);
+				    });
+				  });*/
+				console.log("hello");
 			}
 }
 
