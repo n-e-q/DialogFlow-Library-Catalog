@@ -58,69 +58,71 @@ const rp = require('request-promise-native');
 const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
 const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
 
-module.exports = {
-		test: function(agent, requestBody, url){
-		
-				return rp.get(url)
-					.then(jsonBody => {
-						var body = JSON.parse(jsonBody);
-						console.log(body);
-						var docArray = body.response.docs;
-						//var rbody = request.body;
-						// Location service
-						/*if(requestBody.queryResult.parameters.catalog_service == "where"){
-							console.log("where...");
-						}
-						
-						// Author service
-						if(requestBody.queryResult.parameters.catalog_service == "who"){
-							console.log("who");
-						}
-						
-						// Description service
-						if(requestBody.queryResult.parameters.catalog_service == "describe"){
-							console.log("description")
-						}*/
-						
-						if(docArray.length > 1)
-							agent.add("There are at least " + docArray.length + " instances of this item. Here are the most relevant ones:\n");
-						
-						var result = "";
-						var no = 1;
-						for(var i = 0; i < docArray.length; i++){
-							result = "" + no + ". '" + docArray[i].title_display;
-							
-							if(typeof docArray[i].subtitle_display != 'undefined')
-								result += (": " + docArray[i].subtitle_display);
-							
-							result += "'";
-							result += " [" + docArray[i].format_facet + "]";
-							if(typeof docArray[i].author_display != 'undefined')
-								result += (" -- " + docArray[i].author_display);
-							result += "\n";
-							agent.add(result);
-							no++;
-							
-							promiseRequest();
-						}
-						/*var promises = [];
-						
-						for(var i = 0; i < docArray.length; i++){
-							
-						}*/
-						
-			      		return Promise.resolve(agent);
-					});
-			},
-			
-			promiseRequest: function() {
-				  /*return new Promise(resolve => {
-				    request(url, function(err, response, body) {
-				      resolve(body);
-				    });
-				  });*/
-				console.log("hello");
+function test(agent, requestBody, url){
+	
+	return rp.get(url)
+		.then(jsonBody => {
+			var body = JSON.parse(jsonBody);
+			console.log(body);
+			var docArray = body.response.docs;
+			//var rbody = request.body;
+			// Location service
+			/*if(requestBody.queryResult.parameters.catalog_service == "where"){
+				console.log("where...");
 			}
+			
+			// Author service
+			if(requestBody.queryResult.parameters.catalog_service == "who"){
+				console.log("who");
+			}
+			
+			// Description service
+			if(requestBody.queryResult.parameters.catalog_service == "describe"){
+				console.log("description")
+			}*/
+			
+			if(docArray.length > 1)
+				agent.add("There are at least " + docArray.length + " instances of this item. Here are the most relevant ones:\n");
+			
+			var result = "";
+			var no = 1;
+			for(var i = 0; i < docArray.length; i++){
+				result = "" + no + ". '" + docArray[i].title_display;
+				
+				if(typeof docArray[i].subtitle_display != 'undefined')
+					result += (": " + docArray[i].subtitle_display);
+				
+				result += "'";
+				result += " [" + docArray[i].format_facet + "]";
+				if(typeof docArray[i].author_display != 'undefined')
+					result += (" -- " + docArray[i].author_display);
+				result += "\n";
+				agent.add(result);
+				no++;
+				
+				promiseRequest();
+			}
+			/*var promises = [];
+			
+			for(var i = 0; i < docArray.length; i++){
+				
+			}*/
+			
+      		return Promise.resolve(agent);
+		});
+}
+
+function promiseRequest() {
+	  /*return new Promise(resolve => {
+	    request(url, function(err, response, body) {
+	      resolve(body);
+	    });
+	  });*/
+	console.log("hello");
+}
+
+module.exports = {
+		test: test
 }
 
 /*
