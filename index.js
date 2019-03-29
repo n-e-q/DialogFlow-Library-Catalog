@@ -86,6 +86,8 @@ function test(agent, requestBody, url){
 			
 			var result = "";
 			var no = 1;
+			var promises = [];
+			
 			for(var i = 0; i < docArray.length; i++){
 				result = "" + no + ". '" + docArray[i].title_display;
 				
@@ -100,25 +102,21 @@ function test(agent, requestBody, url){
 				agent.add(result);
 				no++;
 				
-				promiseRequest();
+				promises.append(promiseRequest(url));
 			}
-			/*var promises = [];
-			
-			for(var i = 0; i < docArray.length; i++){
-				
-			}*/
 			
       		return Promise.resolve(agent);
 		});
 }
 
-function promiseRequest() {
-	  /*return new Promise(resolve => {
+function promiseRequest(url) {
+	  return new Promise(resolve => {
 	    request(url, function(err, response, body) {
-	      resolve(body);
+	    	console.log("hello");
+	    	resolve(body);
 	    });
-	  });*/
-	console.log("hello");
+	  });
+	//console.log("hello");
 }
 
 module.exports = {
