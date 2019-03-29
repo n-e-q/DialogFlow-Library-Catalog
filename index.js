@@ -106,6 +106,7 @@ function test(agent, requestBody, url){
 				avail_url += docArray[i].id;
 				avail_url += "/availability.json";
 				//promises.append(promiseRequest(avail_url));
+				console.log(avail_url);
 			}
 			
       		return Promise.resolve(agent);
