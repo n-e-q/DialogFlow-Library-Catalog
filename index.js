@@ -106,21 +106,21 @@ function test(agent, requestBody, url){
 				avail_url += docArray[i].id;
 				avail_url += "/availability.json";
 				//promises.append(promiseRequest(avail_url));
-				console.log(avail_url);
+				promiseRequest(agent,avail_url);
+				//console.log(avail_url);
 			}
 			
       		return Promise.resolve(agent);
 		});
 }
 
-function promiseRequest(url) {
-	  return new Promise(resolve => {
-	    request(url, function(err, response, body) {
-	    	console.log(body);
-	    	return Promise.resolve(body);
-	    });
-	  });
-	//console.log("hello");
+function promiseRequest(agent, url) {
+	  return rp.get(url)
+	  	.then(jsonBody => {
+	  		var test_string = "hello";
+	  		console.log(test_string);
+	  		return Promise.resolve(url);
+	  	});
 }
 
 module.exports = {
