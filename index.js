@@ -102,7 +102,10 @@ function test(agent, requestBody, url){
 				agent.add(result);
 				no++;
 				
-				promises.append(promiseRequest(url));
+				var avail_url = "http://search.lib.virginia.edu/catalog/";
+				avail_url += docArray[i].id;
+				avail_url += "/availability.json";
+				promises.append(promiseRequest(avail_url));
 			}
 			
       		return Promise.resolve(agent);
@@ -112,7 +115,7 @@ function test(agent, requestBody, url){
 function promiseRequest(url) {
 	  return new Promise(resolve => {
 	    request(url, function(err, response, body) {
-	    	console.log("hello");
+	    	console.log(body);
 	    	resolve(body);
 	    });
 	  });
