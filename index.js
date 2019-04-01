@@ -116,13 +116,14 @@ function test(agent, requestBody, url){
 				
 		      promises.push(p);
 			}
-			Promise.all(promises);
+			Promise.all(promises).then(notneeded => {
 			
-			for(var j = 0; j < avail_data.length; j++){
-				console.log(avail_data[j]);
-			}
+					for(var j = 0; j < avail_data.length; j++){
+						console.log(avail_data[j]);
+					}
 			
-      		return Promise.resolve(agent);
+					return Promise.resolve(agent);
+			});
 		});
 }
 
