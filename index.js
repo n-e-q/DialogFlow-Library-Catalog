@@ -105,10 +105,11 @@ function test(agent, requestBody, url){
 				result += "\n";
 				
 				let card = new Card({
-					"title": "this is a title",
-					"text": "this is text"
+					title: "this is a title",
+					text: "this is text"
 				});
 				agent.add(card);
+				
 				no++;
 				
 				var avail_url = "http://search.lib.virginia.edu/catalog/";
