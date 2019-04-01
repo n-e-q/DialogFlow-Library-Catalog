@@ -91,7 +91,7 @@ function test(agent, requestBody, url){
 			var avail_data = [];
 			
 			for(var i = 0; i < docArray.length; i++){
-				result = "" + no + ". '" + docArray[i].title_display;
+				//result = "" + no + ". '" + docArray[i].title_display;
 				
 				if(typeof docArray[i].subtitle_display != 'undefined')
 					result += (": " + docArray[i].subtitle_display);
@@ -101,7 +101,12 @@ function test(agent, requestBody, url){
 				if(typeof docArray[i].author_display != 'undefined')
 					result += (" -- " + docArray[i].author_display);
 				result += "\n";
-				agent.add(result);
+				
+				agent.add(new Card({
+					title: docArray[i].title_display,
+					text: result
+				})
+				);
 				no++;
 				
 				var avail_url = "http://search.lib.virginia.edu/catalog/";
@@ -127,15 +132,6 @@ function test(agent, requestBody, url){
 			});
 		});
 }
-
-/*function promiseRequest(agent, url) {
-	  return rp.get(url)
-	  	.then(jsonBody => {
-	  		var test_string = "hello";
-	  		console.log(test_string);
-	  		return Promise.resolve(url);
-	  	});
-}*/
 
 module.exports = {
 		test: test
