@@ -55,6 +55,7 @@ function hours(agent) {
         });
   }*/
 const rp = require('request-promise-native');
+const fetch = require('isomorphic-fetch');
 const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
 const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
 
