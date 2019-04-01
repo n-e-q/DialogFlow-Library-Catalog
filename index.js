@@ -104,14 +104,10 @@ function test(agent, requestBody, url){
 					result += (" -- " + docArray[i].author_display);
 				result += "\n";
 				
-				agent.add(new Card({
-			        title: 'Title: this is a card title',
-			        imageUrl: 'https://developers.google.com/actions/assistant.png',
-			        text: 'This is the body text of a card.  You can even use line\n  breaks and emoji! 💁',
-			        buttonText: 'This is a button',
-			        buttonUrl: 'https://assistant.google.com/'
-			      })
-			    );
+				let card = new Card();
+				card.setTitle('this is a title');
+				card.setText('this is text');
+				agent.add(card);
 				no++;
 				
 				var avail_url = "http://search.lib.virginia.edu/catalog/";
