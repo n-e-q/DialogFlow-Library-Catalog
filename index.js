@@ -93,9 +93,9 @@ function test(agent, requestBody, url){
 			
 			for(var i = 0; i < docArray.length; i++){
 				//result = "" + no + ". '" + docArray[i].title_display;
-				
+				var item_title = "" + docArray[i].title_display;
 				if(typeof docArray[i].subtitle_display != 'undefined')
-					result += (": " + docArray[i].subtitle_display);
+					result = (": " + docArray[i].subtitle_display);
 				
 				result += "'";
 				result += " [" + docArray[i].format_facet + "]";
