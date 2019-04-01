@@ -104,7 +104,7 @@ function test(agent, requestBody, url){
 				result += "\n";
 				
 				agent.add(new Card({
-					title: docArray[i].title_display,
+					title: item_title,
 					text: result
 				})
 				);
