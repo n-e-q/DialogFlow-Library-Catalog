@@ -104,11 +104,14 @@ function test(agent, requestBody, url){
 					result += (" -- " + docArray[i].author_display);
 				result += "\n";
 				
-				let card = new Card({
-					title: "this is a title",
-					text: "this is text"
-				});
-				agent.add(card);
+				agent.add(new Card({
+	                title: 'hours for',
+	                imageUrl: 'https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png',
+	                text: 'hello',
+	                buttonText: 'UVA Library Hours',
+	                buttonUrl: 'https://library.virginia.edu/hours'
+	                })
+	            );
 				
 				no++;
 				
