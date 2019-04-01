@@ -13,6 +13,9 @@
  * 			"queryTextSentiment":{"score":-0.1,"magnitude":0.1}}},
  * 	"originalDetectIntentRequest":{"payload":{}},"session":"projects/devhubsquad/agent/sessions/c30007ed-5f78-52ed-1bdb-a09533cfed3c"}
  */
+const rp = require('request-promise-native');
+//const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
+//const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
 
 function test(agent, requestBody, url){
 	
