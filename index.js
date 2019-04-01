@@ -13,9 +13,50 @@
  * 			"queryTextSentiment":{"score":-0.1,"magnitude":0.1}}},
  * 	"originalDetectIntentRequest":{"payload":{}},"session":"projects/devhubsquad/agent/sessions/c30007ed-5f78-52ed-1bdb-a09533cfed3c"}
  */
+/*const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
+const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
+
+function catalog(agent) {
+    console.log("Inside catalog function");
+    return rp.get(catalog_url)
+		.then(jsonBody => {
+			var body = JSON.parse(jsonBody);
+			var rbody = request.body;
+			// Location service
+			if(body.queryResult.parameters.catalog_service == "where"){
+					
+			}
+			
+			// Author service
+			if(body.queryResult.parameters.catalog_service == "who"){
+				
+			}
+			
+			// Description service
+			if(body.queryResult.parameters.catalog_service == "where"){
+				
+			}
+			
+			agent.add("catalog is wip...");
+      		return Promise.resolve(agent);
+		});
+  }
+
+function hours(agent) {
+    return rp.get(hour_url)
+        .then(jsonBody => {
+            var body = JSON.parse(jsonBody);
+      		var rbody = request.body;
+      		var date = rbody.queryResult.parameters.date.substring(0,10);
+      		var time = body["2090"][date].rendered;
+      		console.log(date);
+            agent.add(time);
+            return Promise.resolve(agent);
+        });
+  }*/
 const rp = require('request-promise-native');
-//const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
-//const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
+const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
+const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
 
 function test(agent, requestBody, url){
 	
@@ -46,6 +87,7 @@ function test(agent, requestBody, url){
 			var result = "";
 			var no = 1;
 			var promises = [];
+			var avail_data = [];
 			
 			for(var i = 0; i < docArray.length; i++){
 				result = "" + no + ". '" + docArray[i].title_display;
@@ -65,22 +107,33 @@ function test(agent, requestBody, url){
 				avail_url += docArray[i].id;
 				avail_url += "/availability.json";
 				//promises.append(promiseRequest(avail_url));
-				promiseRequest(agent,avail_url);
+				//promiseRequest(agent,avail_url);
 				//console.log(avail_url);
+				
+				let p = fetch(avail_url)
+		        	.then(res=>{return res.json()})
+		        	.then(avaData=>{avail_data.push(avaData)});
+				
+		      promises.push(p);
+			}
+			Promise.all(promises);
+			
+			for(var j = 0; j < avail_data.length; j++){
+				console.log(avail_data[j]);
 			}
 			
       		return Promise.resolve(agent);
 		});
 }
 
-function promiseRequest(agent, url) {
+/*function promiseRequest(agent, url) {
 	  return rp.get(url)
 	  	.then(jsonBody => {
 	  		var test_string = "hello";
 	  		console.log(test_string);
 	  		return Promise.resolve(url);
 	  	});
-}
+}*/
 
 module.exports = {
 		test: test
