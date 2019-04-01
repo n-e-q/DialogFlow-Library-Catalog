@@ -105,8 +105,8 @@ function test(agent, requestBody, url){
 				result += "\n";
 				
 				agent.add(new Card({
-					title: item_title,
-					text: result
+					title: 'test title',
+					text: 'test text'
 				})
 				);
 				no++;
