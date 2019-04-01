@@ -95,9 +95,10 @@ function test(agent, requestBody, url){
 				//result = "" + no + ". '" + docArray[i].title_display;
 				var item_title = "" + docArray[i].title_display;
 				if(typeof docArray[i].subtitle_display != 'undefined')
-					result = (": " + docArray[i].subtitle_display);
-				
-				result += "'";
+					result = ("" + docArray[i].subtitle_display);
+				else
+					result = "";
+				//result += "'";
 				result += " [" + docArray[i].format_facet + "]";
 				if(typeof docArray[i].author_display != 'undefined')
 					result += (" -- " + docArray[i].author_display);
