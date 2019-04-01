@@ -104,9 +104,10 @@ function test(agent, requestBody, url){
 					result += (" -- " + docArray[i].author_display);
 				result += "\n";
 				
-				let card = new Card('test title');
-				card.setTitle('this is a title');
-				card.setText('this is text');
+				let card = new Card({
+					"title": "this is a title",
+					"text": "this is text"
+				});
 				agent.add(card);
 				no++;
 				
