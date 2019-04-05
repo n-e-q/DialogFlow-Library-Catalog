@@ -104,14 +104,7 @@ function test(agent, requestBody, url){
 					result += (" -- " + docArray[i].author_display);
 				result += "\n";
 				
-				agent.add(new Card({
-	                title: 'hours for',
-	                imageUrl: 'https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png',
-	                text: 'hello',
-	                buttonText: 'UVA Library Hours',
-	                buttonUrl: 'https://library.virginia.edu/hours'
-	                })
-	            );
+				
 				
 				no++;
 				
@@ -133,6 +126,15 @@ function test(agent, requestBody, url){
 					for(var j = 0; j < avail_data.length; j++){
 						console.log(avail_data[j]);
 					}
+					
+					agent.add(new Card({
+		                title: 'hours for',
+		                imageUrl: 'https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png',
+		                text: 'hello',
+		                buttonText: 'UVA Library Hours',
+		                buttonUrl: 'https://library.virginia.edu/hours'
+		                })
+		            );
 			
 					return Promise.resolve(agent);
 			});
