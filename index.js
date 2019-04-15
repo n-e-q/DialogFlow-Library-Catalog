@@ -146,7 +146,14 @@ function test(agent, requestBody, url){
 							})
 		            );*/
 					
-					agent.add(new Suggestion("This is a suggestion"));
+					let conv = agent.conv();
+					conv.ask(new Card({
+						title: "This is a card title",
+						text: "Card text"
+					}));
+					agent.add(conv);
+					
+					//agent.add(new Suggestion("This is a suggestion"));
 			
 					return Promise.resolve(agent);
 			});
