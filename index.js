@@ -56,6 +56,7 @@ function hours(agent) {
   }*/
 const rp = require('request-promise-native');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
+const {BrowseCarousel} = require('actions-on-google');
 const fetch = require('isomorphic-fetch');
 const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
 const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
@@ -119,7 +120,7 @@ function test(agent, requestBody, url){
 		        	.then(res=>{return res.json()})
 		        	.then(avaData=>{avail_data.push(avaData)});
 				
-		      promises.push(p);
+				promises.push(p);
 			}
 			Promise.all(promises).then(notneeded => {
 			
@@ -127,13 +128,22 @@ function test(agent, requestBody, url){
 						console.log(avail_data[j]);
 					}
 					
-					agent.add(new Card({
-		                title: 'hours for',
-		                imageUrl: 'https://developers.google.com/actions/images/badges/XPM_BADGING_GoogleAssistant_VER.png',
-		                text: 'hello',
-		                buttonText: 'UVA Library Hours',
-		                buttonUrl: 'https://library.virginia.edu/hours'
-		                })
+					agent.add(new BrowseCarousel({
+						  items: [
+							    new BrowseCarouselItem({
+							      title: 'Title of item 1',
+							      url: 'google.com',
+							      description: 'Description of item 1',
+							      footer: 'Item 1 footer',
+							    }),
+							    new BrowseCarouselItem({
+							      title: 'Google Assistant',
+							      url: 'google.com',
+							      description: 'Google Assistant on Android and iOS',
+							      footer: 'More information about the Google Assistant',
+							    }),
+							  ],
+							})
 		            );
 			
 					return Promise.resolve(agent);
