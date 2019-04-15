@@ -128,7 +128,7 @@ function test(agent, requestBody, url){
 						console.log(avail_data[j]);
 					}
 					
-					agent.add(new BrowseCarousel({
+					/*agent.add(new BrowseCarousel({
 						  items: [
 							    new BrowseCarouselItem({
 							      title: 'Title of item 1',
@@ -144,7 +144,9 @@ function test(agent, requestBody, url){
 							    }),
 							  ],
 							})
-		            );
+		            );*/
+					
+					agent.add(new Suggestion("This is a suggestion"));
 			
 					return Promise.resolve(agent);
 			});
