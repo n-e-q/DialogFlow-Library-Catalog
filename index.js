@@ -45,8 +45,8 @@ function test(agent, requestBody, url){
 				console.log("description")
 			}*/
 			
-			//if(docArray.length > 1)
-			//	agent.add("There are at least " + docArray.length + " instances of this item. Here are the most relevant ones:\n");
+			if(docArray.length > 1)
+				agent.add("There are at least " + docArray.length + " instances of this item. Here are the most relevant ones:\n");
 			
 			var result = "";
 			var no = 1;
@@ -54,21 +54,20 @@ function test(agent, requestBody, url){
 			var avail_data = [];
 			
 			for(var i = 0; i < docArray.length; i++){
-				//result = "" + no + ". '" + docArray[i].title_display;
+				result = "" + no + ". '" + docArray[i].title_display;
 				var item_title = "" + docArray[i].title_display;
 				if(typeof docArray[i].subtitle_display != 'undefined')
 					result = ("" + docArray[i].subtitle_display);
 				else
-					result = "";
-				//result += "'";
+					result += "'";
+				
 				result += " [" + docArray[i].format_facet + "]";
 				if(typeof docArray[i].author_display != 'undefined')
 					result += (" -- " + docArray[i].author_display);
 				result += "\n";
 				
-				
-				
 				no++;
+				agent.add(result);
 				
 				var avail_url = "http://search.lib.virginia.edu/catalog/";
 				avail_url += docArray[i].id;
@@ -98,15 +97,8 @@ function test(agent, requestBody, url){
 				    );
 				    agent.add(new Suggestion('Quick Reply'));
 				    agent.add(new Suggestion('Suggestion'));*/
-					let card = new Card({
-						title: 'Title: this is a card title',
-				        imageUrl: 'https://developers.google.com/actions/assistant.png',
-				        text: 'This is the body text of a card.  You can even use line\n  breaks and emoji! 💁',
-				        buttonText: 'This is a button',
-				        buttonUrl: 'https://assistant.google.com/'
-					});
 					
-					return Promise.resolve(card);
+					return Promise.resolve(agent);
 			});
 		});
 }
