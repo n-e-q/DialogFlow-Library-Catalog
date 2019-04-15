@@ -56,7 +56,7 @@ function hours(agent) {
   }*/
 const rp = require('request-promise-native');
 const {Card, Suggestion} = require('dialogflow-fulfillment');
-const {BrowseCarousel} = require('actions-on-google');
+const {BrowseCarousel, BrowseCarouselItem} = require('actions-on-google');
 const fetch = require('isomorphic-fetch');
 const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
 const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
