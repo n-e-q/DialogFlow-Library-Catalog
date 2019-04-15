@@ -13,47 +13,7 @@
  * 			"queryTextSentiment":{"score":-0.1,"magnitude":0.1}}},
  * 	"originalDetectIntentRequest":{"payload":{}},"session":"projects/devhubsquad/agent/sessions/c30007ed-5f78-52ed-1bdb-a09533cfed3c"}
  */
-/*const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
-const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
 
-function catalog(agent) {
-    console.log("Inside catalog function");
-    return rp.get(catalog_url)
-		.then(jsonBody => {
-			var body = JSON.parse(jsonBody);
-			var rbody = request.body;
-			// Location service
-			if(body.queryResult.parameters.catalog_service == "where"){
-					
-			}
-			
-			// Author service
-			if(body.queryResult.parameters.catalog_service == "who"){
-				
-			}
-			
-			// Description service
-			if(body.queryResult.parameters.catalog_service == "where"){
-				
-			}
-			
-			agent.add("catalog is wip...");
-      		return Promise.resolve(agent);
-		});
-  }
-
-function hours(agent) {
-    return rp.get(hour_url)
-        .then(jsonBody => {
-            var body = JSON.parse(jsonBody);
-      		var rbody = request.body;
-      		var date = rbody.queryResult.parameters.date.substring(0,10);
-      		var time = body["2090"][date].rendered;
-      		console.log(date);
-            agent.add(time);
-            return Promise.resolve(agent);
-        });
-  }*/
 'use strict';
 const functions = require('firebase-functions');
 const {WebhookClient, Card, Suggestion} = require('dialogflow-fulfillment');
@@ -85,8 +45,8 @@ function test(agent, requestBody, url){
 				console.log("description")
 			}*/
 			
-			if(docArray.length > 1)
-				agent.add("There are at least " + docArray.length + " instances of this item. Here are the most relevant ones:\n");
+			//if(docArray.length > 1)
+			//	agent.add("There are at least " + docArray.length + " instances of this item. Here are the most relevant ones:\n");
 			
 			var result = "";
 			var no = 1;
@@ -113,9 +73,6 @@ function test(agent, requestBody, url){
 				var avail_url = "http://search.lib.virginia.edu/catalog/";
 				avail_url += docArray[i].id;
 				avail_url += "/availability.json";
-				//promises.append(promiseRequest(avail_url));
-				//promiseRequest(agent,avail_url);
-				//console.log(avail_url);
 				
 				let p = fetch(avail_url)
 		        	.then(res=>{return res.json()})
@@ -130,7 +87,7 @@ function test(agent, requestBody, url){
 					}
 					
 					// Card test
-					agent.add('3. This message is from Dialogflow\'s Cloud Functions for Firebase editor!');
+					/*agent.add('3. This message is from Dialogflow\'s Cloud Functions for Firebase editor!');
 				    agent.add(new Card({
 				        title: 'Title: this is a card title',
 				        imageUrl: 'https://developers.google.com/actions/assistant.png',
@@ -140,9 +97,16 @@ function test(agent, requestBody, url){
 				      })
 				    );
 				    agent.add(new Suggestion('Quick Reply'));
-				    agent.add(new Suggestion('Suggestion'));
+				    agent.add(new Suggestion('Suggestion'));*/
+					let card = new Card({
+						title: 'Title: this is a card title',
+				        imageUrl: 'https://developers.google.com/actions/assistant.png',
+				        text: 'This is the body text of a card.  You can even use line\n  breaks and emoji! 💁',
+				        buttonText: 'This is a button',
+				        buttonUrl: 'https://assistant.google.com/'
+					});
 					
-					return Promise.resolve(agent);
+					return Promise.resolve(card);
 			});
 		});
 }
