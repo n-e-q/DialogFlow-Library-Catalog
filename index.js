@@ -54,9 +54,9 @@ function hours(agent) {
             return Promise.resolve(agent);
         });
   }*/
+'use strict';
 const rp = require('request-promise-native');
-const {Card, Suggestion} = require('dialogflow-fulfillment');
-const {BrowseCarousel, BrowseCarouselItem} = require('actions-on-google');
+const {WebhookClient, Card, Suggestion} = require('dialogflow-fulfillment');
 const fetch = require('isomorphic-fetch');
 const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
 const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
@@ -128,33 +128,19 @@ function test(agent, requestBody, url){
 						console.log(avail_data[j]);
 					}
 					
-					/*agent.add(new BrowseCarousel({
-						  items: [
-							    new BrowseCarouselItem({
-							      title: 'Title of item 1',
-							      url: 'google.com',
-							      description: 'Description of item 1',
-							      footer: 'Item 1 footer',
-							    }),
-							    new BrowseCarouselItem({
-							      title: 'Google Assistant',
-							      url: 'google.com',
-							      description: 'Google Assistant on Android and iOS',
-							      footer: 'More information about the Google Assistant',
-							    }),
-							  ],
-							})
-		            );*/
+					// Card test
+					agent.add('3. This message is from Dialogflow\'s Cloud Functions for Firebase editor!');
+				    agent.add(new Card({
+				        title: 'Title: this is a card title',
+				        imageUrl: 'https://developers.google.com/actions/assistant.png',
+				        text: 'This is the body text of a card.  You can even use line\n  breaks and emoji! 💁',
+				        buttonText: 'This is a button',
+				        buttonUrl: 'https://assistant.google.com/'
+				      })
+				    );
+				    agent.add(new Suggestion('Quick Reply'));
+				    agent.add(new Suggestion('Suggestion'));
 					
-					/*let conv = agent.conv();
-					conv.ask(new Card({
-						title: "This is a card title",
-						text: "Card text"
-					}));
-					agent.add(conv);*/
-					
-					agent.add(new Suggestion('This is a suggestion'));
-			
 					return Promise.resolve(agent);
 			});
 		});
