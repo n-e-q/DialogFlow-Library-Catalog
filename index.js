@@ -55,8 +55,9 @@ function hours(agent) {
         });
   }*/
 'use strict';
-const rp = require('request-promise-native');
+const functions = require('firebase-functions');
 const {WebhookClient, Card, Suggestion} = require('dialogflow-fulfillment');
+const rp = require('request-promise-native');
 const fetch = require('isomorphic-fetch');
 const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
 const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
