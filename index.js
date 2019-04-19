@@ -108,6 +108,7 @@ function getData(requestBody, url){
 					data["text"] = 'Text';
 					data["imageUrl"] = 'https://developers.google.com/actions/assistant.png';
 					
+					console.log("Title: " + data.title);
 					return Promise.resolve(data);
 			});
 		});
@@ -115,8 +116,9 @@ function getData(requestBody, url){
 
 function catalogCard(agent, requestBody, url){
 	
-	var jsonObj = JSON.parse(getData(requestBody, url));
-	console.log(typeof jsobObj.title);
+	var jsonObj = getData(requestBody, url);
+	console.log(typeof jsonObj.title);
+	console.log(jsonObj.title);
 	agent.add('3. This message is from Dialogflow\'s Cloud Functions for Firebase editor!');
     agent.add(new Card({
         title: jsonObj.title,
