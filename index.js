@@ -88,7 +88,7 @@ function getData(requestBody, url){
 			Promise.all(promises).then(notneeded => {
 			
 					for(var j = 0; j < avail_data.length; j++){
-						console.log(avail_data[j]);
+						//console.log(avail_data[j]);
 					}
 					
 					// Card test
@@ -115,7 +115,8 @@ function getData(requestBody, url){
 
 function catalogCard(agent, requestBody, url){
 	
-	var jsonObj = getData(requestBody, url);
+	var jsonObj = JSON.parse(getData(requestBody, url));
+	console.log(typeof jsobObj.title);
 	agent.add('3. This message is from Dialogflow\'s Cloud Functions for Firebase editor!');
     agent.add(new Card({
         title: jsonObj.title,
