@@ -22,7 +22,9 @@ const fetch = require('isomorphic-fetch');
 const hour_url = 'https://api.devhub.virginia.edu/v1/library/hours';
 const catalog_url = 'https://api.devhub.virginia.edu/v1/library/catalog/';
 
-function test(agent, requestBody, url){
+var data = {};
+
+function getData(requestBody, url){
 	
 	return rp.get(url)
 		.then(jsonBody => {
@@ -45,11 +47,12 @@ function test(agent, requestBody, url){
 				console.log("description")
 			}*/
 			
-			if(docArray.length > 1)
-				agent.add("There are at least " + docArray.length + " instances of this item. Here are the most relevant ones:\n");
+			/*if(docArray.length > 1)
+				agent.add("There are at least " + docArray.length + " instances of this item. Here are the most relevant ones:\n");*/
 			
 			var result = "";
 			var no = 1;
+			var loc_to_item = {};
 			var promises = [];
 			var avail_data = [];
 			
@@ -57,7 +60,7 @@ function test(agent, requestBody, url){
 				result = "" + no + ". '" + docArray[i].title_display;
 				var item_title = "" + docArray[i].title_display;
 				if(typeof docArray[i].subtitle_display != 'undefined')
-					result = ("" + docArray[i].subtitle_display);
+					result += ("" + docArray[i].subtitle_display);
 				else
 					result += "'";
 				
@@ -66,17 +69,20 @@ function test(agent, requestBody, url){
 					result += (" -- " + docArray[i].author_display);
 				result += "\n";
 				
-				no++;
-				agent.add(result);
 				
+				//agent.add(result);
+				no++;
+				// Construct url for availability data of each book item
 				var avail_url = "http://search.lib.virginia.edu/catalog/";
 				avail_url += docArray[i].id;
 				avail_url += "/availability.json";
 				
+				// Fetch the data in JSON form from the above url
 				let p = fetch(avail_url)
 		        	.then(res=>{return res.json()})
 		        	.then(avaData=>{avail_data.push(avaData)});
 				
+				// Each fetch is stored as a promise
 				promises.push(p);
 			}
 			Promise.all(promises).then(notneeded => {
@@ -98,20 +104,30 @@ function test(agent, requestBody, url){
 				    agent.add(new Suggestion('Quick Reply'));
 				    agent.add(new Suggestion('Suggestion'));*/
 					
-					return Promise.resolve(agent);
+					data["title"] = 'Card title';
+					data["text"] = 'Text';
+					data["imageUrl"] = 'https://developers.google.com/actions/assistant.png';
+					
+					return Promise.resolve(data);
 			});
 		});
 }
 
-module.exports = {
-		test: test
+function catalogCard(agent, requestBody, url){
+	
+	jsonObj = getData(requestBody, url);
+	agent.add('3. This message is from Dialogflow\'s Cloud Functions for Firebase editor!');
+    agent.add(new Card({
+        title: jsonObj.title,
+        imageUrl: jsonObj.imageUrl,
+        text: jsonObj.text,
+      })
+    );
+	
+    return agent;
 }
 
-/*
-	var url = "http://search.lib.virginia.edu/catalog?q=";
-	var bookQuery = $booktitle.replace(/ /g, +);
-	url += bookQuery;
-	url += "&catalog_select=all";
-
-
-*/
+module.exports = {
+		catalogCard: catalogCard,
+		getData: getData
+}
