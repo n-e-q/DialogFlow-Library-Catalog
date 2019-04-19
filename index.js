@@ -115,7 +115,7 @@ function getData(requestBody, url){
 
 function catalogCard(agent, requestBody, url){
 	
-	jsonObj = getData(requestBody, url);
+	var jsonObj = getData(requestBody, url);
 	agent.add('3. This message is from Dialogflow\'s Cloud Functions for Firebase editor!');
     agent.add(new Card({
         title: jsonObj.title,
